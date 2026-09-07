@@ -1,20 +1,16 @@
 <script setup>
 /* Librerias externas del proyecto */
 import { ref } from 'vue';
-const emit = defineEmits(['logout'])
-
+import { useRouter } from 'vue-router';
 const cargando = ref(false)
+const router = useRouter()
 
 const handleLogout = () => {
-    emit('logout')
+    router.push('/login')
     cargando.value=true
 }
 
-defineProps({
-    usuarioLogueado:{
-        type: String
-    }
-})
+
 </script>
 
 <template>

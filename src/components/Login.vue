@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const emit = defineEmits(['login'])
-
+const router = useRouter()
 const usuario = ref('')
 const password = ref('')
 const error = ref('')
@@ -16,20 +16,17 @@ const handleLogin = () => {
   setTimeout(() => {
     cargabtn.value = false
     if (usuario.value === 'admin' && password.value === '1234') {
-      emit('login', usuario.value)
+      router.push('/home')
     } else {
       error.value = 'Usuario o contraseña incorrectos'
     }
   }, 400)
 }
 
-const handleRegister = () => {
-  
-}
 </script>
 
 <template>
-  <v-card class="mx-auto pa-4" max-width="400" elevation="6" rounded="lg">
+  <v-card class="mx-auto pa-14" max-width="400" elevation="6" rounded="lg">
     <!-- Encabezado de la tarjeta -->
     <div class="text-center my-3">
       <v-avatar color="primary" size="56">
@@ -101,21 +98,15 @@ const handleRegister = () => {
         >
           Entrar
         </v-btn>
-      </v-card-actions>        
-    </v-form>
-    <v-form @submit="handleRegister">
+      </v-card-actions>   
+      
       <div class="text-center px-4 pb-4">
-          <p>
-          No tiene cuenta? Cree una ahora mismo
+          <p class="">
+          No tiene cuenta? 
+          <router-link to="/registro">Crear ahora</router-link> 
         </p>
         </div>
-
-        <v-card-actions>
-          <!-- Botón crear cuenta -->
-          <v-btn type="cuenta" color="primary" >
-            Crear cuenta
-          </v-btn>
-        </v-card-actions>
     </v-form>
+
   </v-card>
 </template>

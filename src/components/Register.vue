@@ -1,4 +1,12 @@
 <script setup>
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+
+const usuario= ref('')
+const password= ref('')
+const correo= ref('')
+const telefono= ref('')
+const mostrarPassword= ref(false)
 
 </script>
 
@@ -66,15 +74,15 @@
                 <v-btn 
                 type="submit"
                 color="primary"
+                block
                 >
                     Crear
                 </v-btn>
             </v-card-actions>
-
-            <!-- Campo contraseña -->
-            
+            <div class="text-center px-4">
+                <p class="font-body-2 text-medium-emphasis">
+                Ya tienes una cuenta? <router-link to="/">Inicia sesión</router-link></p>
+            </div>            
         </v-form>
     </v-card>
-
-    <v-form @submit="handleRegister"></v-form>
 </template>
