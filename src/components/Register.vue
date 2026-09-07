@@ -1,12 +1,28 @@
 <script setup>
-import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
 
+import { ref } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
+
+const router = useRouter()
 const usuario= ref('')
 const password= ref('')
 const correo= ref('')
 const telefono= ref('')
 const mostrarPassword= ref(false)
+
+const handleRegister = () => {
+    const nuevoUsuario = {
+        
+        usuario: usuario.value,
+        password: password.value,
+        correo: correo.value,
+        telefono: telefono.value
+
+    }
+
+localStorage.setItem('usuario', JSON.stringify(nuevoUsuario))
+router.push('/')
+}
 
 </script>
 
@@ -22,7 +38,7 @@ const mostrarPassword= ref(false)
             </p>
         </div>
 
-        <v-form>
+        <v-form @submit.prevent="handleRegister">
             <v-card-text>
                 <!-- Campo de usuario -->
                 <v-text-field

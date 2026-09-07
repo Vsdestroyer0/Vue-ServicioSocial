@@ -15,12 +15,22 @@ const handleLogin = () => {
 
   setTimeout(() => {
     cargabtn.value = false
-    if (usuario.value === 'admin' && password.value === '1234') {
-      router.push('/home')
-    } else {
-      error.value = 'Usuario o contraseña incorrectos'
+    const datos = localStorage.getItem("usuario")
+
+    if(!datos) {
+      error.value = "No hay usuarios en localStorage"
+      return
     }
-  }, 400)
+
+    const usuariosGuardados = JSON.parse(datos)
+
+    if(usuario.value !== usuariosGuardados.usuario || password.value !== usuariosGuardados.password){
+      error.value = "El usuario o contraseña es incorrecto"
+    } else{
+      router.push('/home')
+    }
+
+  })
 }
 
 </script>
