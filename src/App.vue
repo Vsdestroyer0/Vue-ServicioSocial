@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import { useTheme } from 'vuetify'
 import Login from './components/Login.vue'
 import Navbar from './components/Navbar.vue'
 import AuthView from './vistas/AuthView.vue'

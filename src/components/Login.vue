@@ -8,7 +8,6 @@ const password = ref('')
 const error = ref('')
 const mostrarPassword = ref(false)
 const cargabtn = ref(false)
-const registerButton = ref(false)
 
 const handleLogin = () => {
   error.value = ''
@@ -22,6 +21,10 @@ const handleLogin = () => {
       error.value = 'Usuario o contraseña incorrectos'
     }
   }, 400)
+}
+
+const handleRegister = () => {
+  
 }
 </script>
 
@@ -98,7 +101,9 @@ const handleLogin = () => {
         >
           Entrar
         </v-btn>
-      </v-card-actions>
+      </v-card-actions>        
+    </v-form>
+    <v-form @submit="handleRegister">
       <div class="text-center px-4 pb-4">
           <p>
           No tiene cuenta? Cree una ahora mismo
@@ -107,11 +112,10 @@ const handleLogin = () => {
 
         <v-card-actions>
           <!-- Botón crear cuenta -->
-          <v-btn type="submit" color="primary" >
+          <v-btn type="cuenta" color="primary" >
             Crear cuenta
           </v-btn>
         </v-card-actions>
-        
     </v-form>
   </v-card>
 </template>
