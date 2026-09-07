@@ -1,0 +1,117 @@
+<script setup>
+import { ref } from 'vue'
+
+const emit = defineEmits(['login'])
+
+const usuario = ref('')
+const password = ref('')
+const error = ref('')
+const mostrarPassword = ref(false)
+const cargabtn = ref(false)
+const registerButton = ref(false)
+
+const handleLogin = () => {
+  error.value = ''
+  cargabtn.value = true
+
+  setTimeout(() => {
+    cargabtn.value = false
+    if (usuario.value === 'admin' && password.value === '1234') {
+      emit('login', usuario.value)
+    } else {
+      error.value = 'Usuario o contraseña incorrectos'
+    }
+  }, 400)
+}
+</script>
+
+<template>
+  <v-card class="mx-auto pa-4" max-width="400" elevation="6" rounded="lg">
+    <!-- Encabezado de la tarjeta -->
+    <div class="text-center my-3">
+      <v-avatar color="primary" size="56">
+        <v-icon icon="mdi-account" size="32" color="white" />
+      </v-avatar>
+      <h2>Iniciar Sesión</h2>
+      <p class="text-body-2 text-medium-emphasis">
+        Ingresa tus credenciales para continuar
+      </p>
+    </div>
+
+    <!-- Formulario con Vuetify -->
+    <v-form @submit.prevent="handleLogin">
+      <v-card-text>
+        <!-- Alerta de error -->
+        <v-alert
+          v-if="error"
+          type="error"
+          variant="tonal"
+          density="compact"
+          class="mb-4"
+          closable
+          @click:close="error = ''"
+        >
+          {{ error }}
+        </v-alert>
+
+        <!-- Campo de Usuario -->
+        <v-text-field
+          v-model="usuario"
+          label="Usuario"
+          placeholder="Usuario"
+          prepend-inner-icon="mdi-account"
+          variant="outlined"
+          density="comfortable"
+          color="primary"
+          class="mb-2"
+          required
+        />
+
+        <!-- Campo de Contraseña -->
+        <v-text-field
+          v-model="password"
+          label="Contraseña"
+          placeholder="contraseña"
+          prepend-inner-icon="mdi-lock"
+          :append-inner-icon="mostrarPassword ? 'mdi-eye-off' : 'mdi-eye-outline'"
+          :type="mostrarPassword ? 'text' : 'password'"
+          variant="outlined"
+          density="comfortable"
+          color="primary"
+          @click:append-inner="mostrarPassword = !mostrarPassword"
+          required
+        />
+
+
+      </v-card-text>
+
+      <!-- Botón iniciar sesión -->
+      <v-card-actions class="px-4 pb-4">
+        <v-btn
+          type="submit"
+          color="primary"
+          variant="flat"
+          block
+          size="large"
+          :loading="cargabtn"
+          prepend-icon="mdi-login"
+        >
+          Entrar
+        </v-btn>
+      </v-card-actions>
+      <div class="text-center px-4 pb-4">
+          <p>
+          No tiene cuenta? Cree una ahora mismo
+        </p>
+        </div>
+
+        <v-card-actions>
+          <!-- Botón crear cuenta -->
+          <v-btn type="submit" color="primary" >
+            Crear cuenta
+          </v-btn>
+        </v-card-actions>
+        
+    </v-form>
+  </v-card>
+</template>
