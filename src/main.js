@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router/index.js'
+import VueCookies from 'vue3-cookies'
 
 // Estilos de Vuetify e iconos MDI
 import 'vuetify/styles'
@@ -33,6 +34,9 @@ const vuetify = createVuetify({
 })
 
 const app = createApp(App)
+
 app.use(vuetify)
 app.use(router)
+app.use(VueCookies, { expires: '1d' })
+
 app.mount('#app')

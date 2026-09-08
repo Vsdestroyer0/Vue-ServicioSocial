@@ -20,6 +20,9 @@ importers:
       vue-router:
         specifier: ^5.3.1
         version: 5.3.1(@vue/compiler-sfc@3.5.42)(esbuild@0.21.5)(rollup@4.63.1)(vite@5.4.21)(vue@3.5.42)
+      vue3-cookies:
+        specifier: ^1.0.6
+        version: 1.0.6
       vuetify:
         specifier: ^3.7.0
         version: 3.13.3(vue@3.5.42)
@@ -634,6 +637,9 @@ packages:
       vite:
         optional: true
 
+  vue3-cookies@1.0.6:
+    resolution: {integrity: sha512-a1UvVD0qIgxyOqjlSOwnLnqAnz8ASltugEv8yX+96i/WGZAN9fEDci7xO4HIWZE1uToUnRq9JnFhvfDCSo45OA==}
+
   vue@3.5.42:
     resolution: {integrity: sha512-4RyHQTbQvOPs3MfvUO1Sg0YRrKNnA0mAVtvpd12Tg1fKDN7OHBUl1IqSn8zGJjK9nI3NkNp8cgTpVrSZC5TTcA==}
     peerDependencies:
@@ -1151,6 +1157,12 @@ snapshots:
       - rollup
       - unloader
       - webpack
+
+  vue3-cookies@1.0.6:
+    dependencies:
+      vue: 3.5.42
+    transitivePeerDependencies:
+      - typescript
 
   vue@3.5.42:
     dependencies:

@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCookies } from 'vue3-cookies'
+
 
 const router = useRouter()
 const usuario = ref('')
@@ -8,6 +10,7 @@ const password = ref('')
 const error = ref('')
 const mostrarPassword = ref(false)
 const cargabtn = ref(false)
+const { cookies } = useCookies()
 
 const handleLogin = () => {
   error.value = ''
@@ -28,6 +31,7 @@ const handleLogin = () => {
       error.value = "El usuario o contraseña es incorrecto"
     } else{
       router.push('/home')
+      cookies.set('auth', datos)
     }
 
   })
