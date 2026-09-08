@@ -4,6 +4,7 @@ import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import AuthView from '../vistas/AuthView.vue'
 import UserData from '../vistas/UserData.vue'
+import Pulsaciones from '../vistas/Pulsaciones.vue'
 
 const { cookies } = useCookies();
 
@@ -13,6 +14,7 @@ const routes = [
     { path: '/registro', component: Register },
     { path: '/home', component: AuthView},
     { path: '/data', component: UserData},
+    { path: '/pulsaciones', component: Pulsaciones},
 ]
 
 const router = createRouter({
