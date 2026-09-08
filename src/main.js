@@ -3,11 +3,9 @@ import App from './App.vue'
 import router from './router/index.js'
 import VueCookies from 'vue3-cookies'
 
-// Estilos de Vuetify e iconos MDI
 import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
 
-// Vuetify
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'

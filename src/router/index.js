@@ -2,9 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useCookies } from 'vue3-cookies'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
-import AuthView from '../vistas/AuthView.vue'
-import UserData from '../vistas/UserData.vue'
-import Pulsaciones from '../vistas/Pulsaciones.vue'
+import AuthView from '../view/AuthView.vue'
+import UserData from '../view/UserData.vue'
+import Pulsaciones from '../view/Pulsaciones.vue'
 
 const { cookies } = useCookies();
 

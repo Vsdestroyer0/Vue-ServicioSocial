@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCookies } from 'vue3-cookies'
 
-
 const router = useRouter()
 const usuario = ref('')
 const password = ref('')
@@ -41,7 +40,6 @@ const handleLogin = () => {
 
 <template>
   <v-card class="mx-auto pa-14" max-width="400" elevation="6" rounded="lg">
-    <!-- Encabezado de la tarjeta -->
     <div class="text-center my-3">
       <v-avatar color="primary" size="56">
         <v-icon icon="mdi-account" size="32" color="white" />
@@ -52,10 +50,8 @@ const handleLogin = () => {
       </p>
     </div>
 
-    <!-- Formulario con Vuetify -->
     <v-form @submit.prevent="handleLogin">
       <v-card-text>
-        <!-- Alerta de error -->
         <v-alert
           v-if="error"
           type="error"
@@ -68,7 +64,6 @@ const handleLogin = () => {
           {{ error }}
         </v-alert>
 
-        <!-- Campo de Usuario -->
         <v-text-field
           v-model="usuario"
           label="Usuario"
@@ -81,7 +76,6 @@ const handleLogin = () => {
           required
         />
 
-        <!-- Campo de Contraseña -->
         <v-text-field
           v-model="password"
           label="Contraseña"
@@ -99,7 +93,6 @@ const handleLogin = () => {
 
       </v-card-text>
 
-      <!-- Botón iniciar sesión -->
       <v-card-actions class="px-4 pb-4">
         <v-btn
           type="submit"

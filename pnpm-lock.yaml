@@ -20,9 +20,15 @@ importers:
       vue-router:
         specifier: ^5.3.1
         version: 5.3.1(@vue/compiler-sfc@3.5.42)(esbuild@0.21.5)(rollup@4.63.1)(vite@5.4.21)(vue@3.5.42)
+      vue-session:
+        specifier: ^1.0.0
+        version: 1.0.0
       vue3-cookies:
         specifier: ^1.0.6
         version: 1.0.6
+      vue3-session:
+        specifier: ^1.1.0
+        version: 1.1.0
       vuetify:
         specifier: ^3.7.0
         version: 3.13.3(vue@3.5.42)
@@ -637,8 +643,14 @@ packages:
       vite:
         optional: true
 
+  vue-session@1.0.0:
+    resolution: {integrity: sha512-Ep9lRKGgCZdcGV3In3R3zoSp5Wr+hlcIc8WJ9BG+QKzibwaFZnnvp9HBVdd+dU8d6HGLSi5sWywDmd5MkrkfoQ==}
+
   vue3-cookies@1.0.6:
     resolution: {integrity: sha512-a1UvVD0qIgxyOqjlSOwnLnqAnz8ASltugEv8yX+96i/WGZAN9fEDci7xO4HIWZE1uToUnRq9JnFhvfDCSo45OA==}
+
+  vue3-session@1.1.0:
+    resolution: {integrity: sha512-wZ3rLkyoGrgYWa0zXJGG7C7DDIeLQKLIuonpbYD0oUUt8dkVIdh3G7gtzVF+vNoVS/c6yT20AXZWGpbXWOouMw==}
 
   vue@3.5.42:
     resolution: {integrity: sha512-4RyHQTbQvOPs3MfvUO1Sg0YRrKNnA0mAVtvpd12Tg1fKDN7OHBUl1IqSn8zGJjK9nI3NkNp8cgTpVrSZC5TTcA==}
@@ -1158,11 +1170,15 @@ snapshots:
       - unloader
       - webpack
 
+  vue-session@1.0.0: {}
+
   vue3-cookies@1.0.6:
     dependencies:
       vue: 3.5.42
     transitivePeerDependencies:
       - typescript
+
+  vue3-session@1.1.0: {}
 
   vue@3.5.42:
     dependencies:

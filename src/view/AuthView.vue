@@ -1,8 +1,8 @@
 <script setup>
-/* Librerias externas del proyecto */
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useCookies } from 'vue3-cookies';
+import gato from '/dist/assets/gato.png'
 
 const { cookies } = useCookies()
 const cargando = ref(false)
@@ -32,6 +32,8 @@ const handleData = () => {
             <p>
                 Has iniciado sesión correctamente :D
             </p>
+
+            <v-img :src="gato" alt="Gato" width="200" height="200" class="mx-auto"/>
         </div>
 
         <v-card-actions class="px-4 pb-4">
