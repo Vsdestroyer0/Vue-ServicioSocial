@@ -13,7 +13,7 @@ const routes = [
     { path: '/login', component: Login, name: 'login' },
     { path: '/registro', component: Register },
     { path: '/home', component: AuthView},
-    { path: '/data', component: UserData},
+    { path: '/data', component: UserData, meta: { requiresAuth: true }},
     { path: '/pulsaciones', component: Pulsaciones},
 ]
 
@@ -24,7 +24,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const tieneCookie = cookies.get('auth');
-    if(to.meta.requieresAuth && !tieneCookie){
+    if(to.meta.requiresAuth && !tieneCookie){
         next({ name: 'login' })
     } else{
         next();
@@ -33,4 +33,4 @@ router.beforeEach((to, from, next) => {
 
 })
 
-export default router
+export default router   
