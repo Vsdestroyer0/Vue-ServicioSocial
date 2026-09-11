@@ -2,33 +2,25 @@
 /* Librerias externas del proyecto */
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useCookies } from 'vue3-cookies';
+import { useAuthStore } from '../store/auth';
 
-const { cookies } = useCookies()
+const useAuth = useAuthStore()
+const userInfo = useAuth.valores
 const cargando = ref(false)
 const router = useRouter()
-
-const userData = ref(cookies.get('auth'))
-
-const handleLogout = () => {
-    cookies.remove('auth')
-    router.push('/login')
-    cargando.value=true
-}
-
 
 </script>
 
 <template>
 
     <v-card max-width="650" class="mx-auto pa-4" rounded="lg">
-        <v-card-text v-if="userData">
+        <v-card-text v-if="useAuth.autenticado">
             <div class="text-center">
                 <h2 class="px-4 pa-4">Datos del usuario</h2>
                 <p class="text-text-body-2 text-medium-emphasis">
-                    Usuario: {{userData.usuario}} <br>
-                    Correo: {{userData.correo}} <br>
-                    Teléfono: {{userData.telefono}}
+                    Usuario: {{userInfo.usuario}} <br>
+                    Correo: {{userInfo.correo}} <br>
+                    Teléfono: {{userInfo.telefono}}
                 </p>
             </div>
         </v-card-text>
@@ -43,15 +35,6 @@ const handleLogout = () => {
         </v-card-text>
 
         <v-card-actions class="px-4 pb-4">
-            <v-btn 
-            type="submit"
-            color="primary"
-            prepend-icon="mdi-logout"
-            size="large"
-            :loading="cargando"            
-            @click="handleLogout">
-                Cerrar sesión
-            </v-btn>
 
             <v-btn 
             type="submit"

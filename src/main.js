@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router/index.js'
 import VueCookies from 'vue3-cookies'
+import { createPinia } from 'pinia'
 
 import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
@@ -36,5 +37,6 @@ const app = createApp(App)
 app.use(vuetify)
 app.use(router)
 app.use(VueCookies, { expires: '1d' })
+app.use(createPinia())
 
 app.mount('#app')

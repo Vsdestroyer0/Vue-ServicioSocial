@@ -1,18 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useCookies } from 'vue3-cookies';
+import { useAuthStore } from '../store/auth';
 import gato from '/dist/assets/gato.png'
 
-const { cookies } = useCookies()
+const useAuth = useAuthStore().valores
 const cargando = ref(false)
 const router = useRouter()
 
-const handleLogout = () => {
-    cookies.remove('auth')
-    router.push('/login')
-    cargando.value=true
-}
 
 const handleData = () => {
     router.push('/data')
@@ -21,13 +16,13 @@ const handleData = () => {
 </script>
 
 <template>
-    <v-card max-width="450" class="mx-auto pa-4" rounded="lg">
+    <v-card max-width="650" class="mx-auto pa-4" rounded="lg">
         <div class="text-center my-3">
              <v-avatar color="success" class="mb-4">
                 <v-icon icon="mdi-check-outline" size="32" color="white"/>
             </v-avatar>
             <h2>
-                Bienvenido, {{ cookies.get('auth').usuario }}
+                Bienvenido, {{ useAuth.usuario }}!
             </h2>
             <p>
                 Has iniciado sesión correctamente :D
@@ -37,15 +32,7 @@ const handleData = () => {
         </div>
 
         <v-card-actions class="px-4 pb-4">
-            <v-btn 
-            type="submit"
-            color="primary"
-            prepend-icon="mdi-logout"
-            size="large"
-            :loading="cargando"            
-            @click="handleLogout">
-                Cerrar sesión
-            </v-btn>    
+  
             
             <v-btn
             type="submit"
@@ -58,6 +45,13 @@ const handleData = () => {
                 Ver datos
             </v-btn>
             
+            <v-btn  
+            color="black"
+            prepend-icon="mdi-mouse-left-click"
+            @click="router.push('/pulsaciones')" 
+            >
+                Clicks
+            </v-btn>
         </v-card-actions>
         
     </v-card>

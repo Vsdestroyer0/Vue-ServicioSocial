@@ -5,6 +5,7 @@ import Register from '../components/Register.vue'
 import AuthView from '../view/AuthView.vue'
 import UserData from '../view/UserData.vue'
 import Pulsaciones from '../view/Pulsaciones.vue'
+import FirstPage from '../view/FirstPage.vue'
 
 const { cookies } = useCookies();
 
@@ -15,6 +16,7 @@ const routes = [
     { path: '/home', component: AuthView},
     { path: '/data', component: UserData, meta: { requiresAuth: true }},
     { path: '/pulsaciones', component: Pulsaciones},
+    { path: '/first', component: FirstPage}
 ]
 
 const router = createRouter({

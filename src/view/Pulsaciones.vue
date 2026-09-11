@@ -1,8 +1,6 @@
 <script setup>
-import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
-const router = useRouter()
 const pulsaciones = ref(sessionStorage.getItem('pulsaciones') || 0)
 
 const handleClick = () => {
@@ -20,10 +18,10 @@ const handleClick = () => {
                 <v-icon icon="mdi-mouse-left-click" size="32" color="white"/>
             </v-avatar>
             <h2>
-                Pulsaciones
+                Clicks
             </h2>
             <p>
-                Aquí puedes ver tus pulsaciones
+                Aquí puedes hacer clicks 
             </p>
 
         </div>
@@ -33,7 +31,7 @@ const handleClick = () => {
             <v-btn 
             type="submit"
             color="primary"
-            prepend-icon="mdi-home"
+            prepend-icon="mdi-cursor-default-click"
             size="large"
             :loading="cargando"         
             block   
@@ -43,20 +41,7 @@ const handleClick = () => {
             
         </v-card-actions>
 
-        <v-card-actions class="px-4 pb-4">
-        
-            <v-btn 
-            type="submit"
-            color="primary"
-            prepend-icon="mdi-home"
-            size="large"
-            :loading="cargando"         
-            block   
-            @click="router.push('/login')">
-                Regresar al inicio
-            </v-btn>    
-            
-        </v-card-actions>
+
         
     </v-card>
 </template>

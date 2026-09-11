@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useCookies } from 'vue3-cookies'
+import { useAuthStore } from '../store/auth'
 
 const router = useRouter()
 const usuario = ref('')
@@ -9,7 +9,7 @@ const password = ref('')
 const error = ref('')
 const mostrarPassword = ref(false)
 const cargabtn = ref(false)
-const { cookies } = useCookies()
+const useAuth = useAuthStore()
 
 const handleLogin = () => {
   error.value = ''
@@ -29,8 +29,9 @@ const handleLogin = () => {
     if(usuario.value !== usuariosGuardados.usuario || password.value !== usuariosGuardados.password){
       error.value = "El usuario o contraseña es incorrecto"
     } else{
+      useAuth.login(usuariosGuardados)
       router.push('/home')
-      cookies.set('auth', datos)
+
     }
 
   })
@@ -59,7 +60,6 @@ const handleLogin = () => {
           density="compact"
           class="mb-4"
           closable
-          @click:close="error = ''"
         >
           {{ error }}
         </v-alert>
