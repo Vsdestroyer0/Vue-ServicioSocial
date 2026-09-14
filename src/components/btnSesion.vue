@@ -12,7 +12,7 @@ const handleView = () => {
         router.push('/first')
 
     } else{
-        router.push('/')
+        router.push('/login')
     }
 }
  
