@@ -1,11 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useCookies } from 'vue3-cookies'
-import Login from '../components/Login.vue'
-import Register from '../components/Register.vue'
+import Login from '../view/Login.vue'
+import Register from '../view/Register.vue'
 import AuthView from '../view/AuthView.vue'
 import UserData from '../view/UserData.vue'
 import Pulsaciones from '../view/Pulsaciones.vue'
-import FirstPage from '../view/FirstPage.vue'
+import FirstPage from '../view/LandingPage.vue'
 import { useAuthStore } from '../store/auth.js'
 
 const routes = [
@@ -22,6 +21,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 })
+
 router.beforeEach((to) => {
   const auth = useAuthStore()
   const rolesPermitidos = to.meta.roles

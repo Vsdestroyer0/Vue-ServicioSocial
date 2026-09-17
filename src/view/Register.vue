@@ -1,27 +1,29 @@
 <script setup>
-
 import { ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
+import { useAuthStore } from '../store/auth';
 
 const router = useRouter()
-const usuario= ref('')
-const password= ref('')
-const correo= ref('')
-const telefono= ref('')
-const mostrarPassword= ref(false)
+const useAuth = useAuthStore()
 
-const handleRegister = () => {
-    const nuevoUsuario = {
-        
-        usuario: usuario.value,
-        password: password.value,
-        correo: correo.value,
-        telefono: telefono.value
+const usuario = ref('')
+const password = ref('')
+const correo = ref('')
+const telefono = ref('')
 
+
+const handleRegister = async() => {
+    try{
+        await useAuth.register({
+            usuario: usuario.value,
+            password: password.value,
+            correo: correo.value,
+            telefono: telefono.value
+        })
     }
-
-localStorage.setItem('usuario', JSON.stringify(nuevoUsuario))
-router.push('/')
+    catch(e){
+        throw e
+    }
 }
 
 </script>
@@ -30,7 +32,7 @@ router.push('/')
     <v-card class="mx-auto pa-4" max-width="400" elevation="6" rounded="lg">
         <div class="text-center my-3">
             <v-avatar color="primary" size="56">
-                <v-icon icon="mdi-information" size="32"/>
+                <v-icon icon="mdi-account-edit-outline" />
             </v-avatar>
             <h2>Crear cuenta</h2>
             <p class="font-body-2 text-medium-emphasis">
@@ -38,7 +40,7 @@ router.push('/')
             </p>
         </div>
 
-        <v-form @submit.prevent="handleRegister">
+        <v-form>
             <v-card-text>
                 <!-- Campo de usuario -->
                 <v-text-field
@@ -91,6 +93,7 @@ router.push('/')
                 type="submit"
                 color="primary"
                 block
+                @click="handleRegister"
                 >
                     Crear
                 </v-btn>

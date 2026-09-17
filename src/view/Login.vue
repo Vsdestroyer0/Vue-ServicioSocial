@@ -6,13 +6,11 @@ import { useAuthStore } from '../store/auth'
 const router = useRouter()
 const usuario = ref('')
 const password = ref('')
-const error = ref('')
 const mostrarPassword = ref(false)
 const cargabtn = ref(false)
 const useAuth = useAuthStore()
 
 const handleLogin = async () => {
-  error.value = ''
   cargabtn.value = true
 
   try {
@@ -22,8 +20,8 @@ const handleLogin = async () => {
     })
 
     router.push('/home')
-  } catch {
-    error.value = 'Credenciales inválidas'
+  } catch(e) {
+    throw e
   } finally{
     cargabtn.value = false;
   }
@@ -82,7 +80,6 @@ const handleLogin = async () => {
           required
         />
 
-
       </v-card-text>
 
       <v-card-actions class="px-4 pb-4">
@@ -98,14 +95,13 @@ const handleLogin = async () => {
           Entrar
         </v-btn>
       </v-card-actions>   
-      
+    </v-form>
+
       <div class="text-center px-4 pb-4">
           <p class="">
           No tiene cuenta? 
           <router-link to="/registro">Crear ahora</router-link> 
         </p>
-        </div>
-    </v-form>
-
+      </div>
   </v-card>
 </template>
