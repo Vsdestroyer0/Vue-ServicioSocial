@@ -1,26 +1,41 @@
 <script setup>
 /* Librerias externas del proyecto */
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '../store/auth';
+import api from '../services/axios';
 
-const useAuth = useAuthStore()
-const userInfo = useAuth.valores
-const cargando = ref(false)
+const cargando = ref(true)
 const router = useRouter()
+const error = ref('')
+const userInfo = ref(null)
+
+onMounted(async () => {
+    try {
+        const response = await api.get('/usuario')
+        userInfo.value = response.data.usuario
+    } catch (e) {
+        error.value = 'No se pudieron cargar los datos'
+    } finally{
+        cargando.value = false
+    }
+})
 
 </script>
 
 <template>
 
     <v-card max-width="650" class="mx-auto pa-4" rounded="lg">
-        <v-card-text v-if="useAuth.autenticado">
+        <v-card-text v-if="cargando">
+            Cargando
+        </v-card-text>
+        
+        <v-card-text v-else-if="userInfo">
             <div class="text-center">
                 <h2 class="px-4 pa-4">Datos del usuario</h2>
                 <p class="text-text-body-2 text-medium-emphasis">
                     Usuario: {{userInfo.usuario}} <br>
-                    Correo: {{userInfo.correo}} <br>
-                    Teléfono: {{userInfo.telefono}}
+                    Correo: {{ userInfo.correo}} <br>
+                    Telefono: {{ userInfo.telefono }}
                 </p>
             </div>
         </v-card-text>

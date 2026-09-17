@@ -6,17 +6,21 @@ const router = useRouter()
 const useAuth = useAuthStore()
 
 
-const handleView = () => {
-    if(useAuth.autenticado){
-        useAuth.logout()
-        router.push('/first')
+const handleView = async () => {
+    try{
+        if(useAuth.autenticado){
+            useAuth.logout()
+            router.push('/first')
 
-    } else{
-        router.push('/login')
+        } else{
+            router.push('/login')
+        }
+    }
+    catch (e){
+        throw (e)
     }
 }
  
-
 </script>
 
 <template>
@@ -25,7 +29,7 @@ const handleView = () => {
     type="submit"
     color ="primary"
     @click="handleView"
-    :prepend-icon="autenticado ? 'mdi-logout' : 'mdi-login'"
+    :prepend-icon="useAuth.autenticado ? 'mdi-logout' : 'mdi-login'"
     >
     {{useAuth.autenticado ? 'Cerrar sesión' : 'Iniciar sesión'}}
     </v-btn>

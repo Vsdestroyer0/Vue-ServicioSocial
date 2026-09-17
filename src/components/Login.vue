@@ -11,30 +11,22 @@ const mostrarPassword = ref(false)
 const cargabtn = ref(false)
 const useAuth = useAuthStore()
 
-const handleLogin = () => {
+const handleLogin = async () => {
   error.value = ''
   cargabtn.value = true
 
-  setTimeout(() => {
-    cargabtn.value = false
-    const datos = localStorage.getItem("usuario")
+  try {
+    await useAuth.login({
+      correo: usuario.value,
+      password: password.value
+    })
 
-    if(!datos) {
-      error.value = "No hay usuarios en localStorage"
-      return
-    }
-
-    const usuariosGuardados = JSON.parse(datos)
-
-    if(usuario.value !== usuariosGuardados.usuario || password.value !== usuariosGuardados.password){
-      error.value = "El usuario o contraseña es incorrecto"
-    } else{
-      useAuth.login(usuariosGuardados)
-      router.push('/home')
-
-    }
-
-  })
+    router.push('/home')
+  } catch {
+    error.value = 'Credenciales inválidas'
+  } finally{
+    cargabtn.value = false;
+  }
 }
 
 </script>
@@ -66,8 +58,8 @@ const handleLogin = () => {
 
         <v-text-field
           v-model="usuario"
-          label="Usuario"
-          placeholder="Usuario"
+          label="Correo"
+          placeholder="xxxx@xxxx.com"
           prepend-inner-icon="mdi-account"
           variant="outlined"
           density="comfortable"

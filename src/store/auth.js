@@ -1,23 +1,39 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { useCookies } from 'vue3-cookies'
+import api from '../services/axios'
 
 const useAuthStore = defineStore('auth', () => {
-    const { cookies } = useCookies();
-    const usuario = ref(!!cookies.get('auth'));
-    const valores = ref(cookies.get('auth'));
-
+    const usuario = ref('')
     const autenticado = computed(() => !!usuario.value)
+    const valor = computed(() => usuario.value)
 
-    function login(datosUsuario){
-        usuario.value = datosUsuario
-        cookies.set('auth', JSON.stringify(datosUsuario))
+    async function login(datosUsuario){
+        try{
+            const response = await api.post('/login', datosUsuario)
+
+            usuario.value = response.data.usuario
+            return response.data.usuario
+        }
+        catch(e){
+            throw(e)
+        }
     }
 
-    function logout(){
+    async function register(datos){
+        try{
+            const response = await api.post('/registro', datos)
+            return response.data
+        }
+        catch(e){
+            throw(e)
+        }
+    }
+
+    async function logout(){
+        await api.post('/logout')
         usuario.value = null
-        cookies.remove('auth')
     }
-return { usuario, autenticado, valores, login, logout }
+
+return { usuario, autenticado, valor, login, register, logout }
 })
 export { useAuthStore }
