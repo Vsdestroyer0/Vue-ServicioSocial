@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "styleguide": "vue-styleguidist server --config styleguide.config.cjs",
+    "styleguide:build": "vue-styleguidist build"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
@@ -22,6 +24,11 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.4",
-    "vite": "^5.4.21"
+    "css-loader": "^7.1.5",
+    "style-loader": "^4.0.0",
+    "vite": "^5.4.21",
+    "vue-loader": "^17.4.2",
+    "vue-styleguidist": "^4.72.4",
+    "webpack": "^5.111.0"
   }
 }

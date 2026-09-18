@@ -1,12 +1,18 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '../store/auth';
+import { useAuthStore } from '../store/auth.js';
 import gato from '/dist/assets/gato.png'
 
 const useAuth = useAuthStore()
 const cargando = ref(false)
 const router = useRouter()
+
+watchEffect(() => {
+    if(!useAuth.autenticado){
+        router.push('/login')
+    }
+})
 
 </script>
 

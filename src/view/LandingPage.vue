@@ -1,9 +1,9 @@
 <script setup>
 import PageLayout from '../layouts/pageLayout.vue';
-import image from '/dist/assets/images.jpg'
+import image from '../../dist/assets/images.jpg'
 </script>
 
-<<template>
+<template>
     <page-layout>
         <template #Titulo>Bienvenido a la página principal</template>
         <template #Texto>
@@ -16,4 +16,4 @@ import image from '/dist/assets/images.jpg'
 
         </template>
     </page-layout>
-</template>>
+</template>

@@ -1,38 +1,10 @@
-<script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '../store/auth.js'
+Vista de autenticación del usuario, utiliza `useAuthStore().login` para leer la información y enviarla al backend para validarla, y tiene 2 casos
 
-const router = useRouter()
-const usuario = ref('')
-const password = ref('')
-const mostrarPassword = ref(false)
-const cargabtn = ref(false)
-const error = ref('')
-const useAuth = useAuthStore()
+- El usuario ingresa los campos correspondientes y redirige al usuario al apartado `AuthView`
+- El usuario ingresa mal los parámetros y salta un v-alert para avisarle del problema mediante `authController.js`, y sus códigos de estado (esto mediante res.status(#estado).json({message: "Mensaje personalizado"})), si no se encuentra ningún código de estado devuelve que no se completaron los parámetros
 
-
-const handleLogin = async () => {
-  cargabtn.value = true
-  error.value = ''
-
-  try {
-    await useAuth.login({
-      correo: usuario.value,
-      password: password.value
-    })
-    router.push('/home')
-  } catch (err) {
-    error.value = err.response?.data?.message || 'No se pudo iniciar sesión.'
-  } finally {
-    cargabtn.value = false
-  }
-}
-
-</script>
-
-<template>
-  <v-card class="mx-auto pa-14" max-width="400" elevation="6" rounded="lg">
+``` vue
+<v-card class="mx-auto pa-14" max-width="400" elevation="6" rounded="lg">
     <div class="text-center my-3">
       <v-avatar color="primary" size="56">
         <v-icon icon="mdi-account" size="32" color="white" />
@@ -98,12 +70,20 @@ const handleLogin = async () => {
         </v-btn>
       </v-card-actions>   
     </v-form>
+</v-card>
+```
 
-      <div class="text-center px-4 pb-4">
+## No posee una cuenta
+
+Si el usuario no posee una cuenta, puede dirigirse a la parte de abajo en donde está un hipervínculo hacía `Register`
+
+``` vue
+<v-card class="mx-auto pa-14" max-width="400" elevation="6" rounded="lg">
+  <div class="text-center px-4 pb-4">
           <p class="">
           No tiene cuenta? 
           <router-link to="/registro">Crear ahora</router-link> 
         </p>
-      </div>
-  </v-card>
-</template>
+    </div>
+</v-card>
+```

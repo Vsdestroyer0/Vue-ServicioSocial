@@ -1,31 +1,8 @@
-<script setup>
-import { ref } from 'vue'
-import { useAuthStore } from '../store/auth.js';
+Esta vista es la encargada de registrar a los usuarios, usando la importación `useAuthStore()`, aquí se ingresan los datos de entrada mediante el método `register`, este recibe el valor de 4 parámetros que son: usuario, password, correo y telefono
+Estos valores se cargan gracias a que adentro de los campos se asigna el parámetro v-model, cuando a este se le asigna un nombre, se asigna el nuevo valor dentro de la constante, y posteriormente se puee hacer un Valor.value para extraer esa información, como aquí
+Y ya se muestra y carga dentro de los campos, ahora, de igual forma tenemos varios códigos de error, estos se presentan por medio de un v-alert y le responden al usuario el porque no pudo registrarse
 
-const useAuth = useAuthStore()
-
-const usuario = ref('')
-const password = ref('')
-const correo = ref('')
-const telefono = ref('')
-const error = ref('')
-
-const handleRegister = async() => {
-    try{
-        await useAuth.register({
-            usuario: usuario.value,
-            password: password.value,
-            correo: correo.value,
-            telefono: telefono.value
-        })
-    }
-    catch(e){
-        error.value = e.response.data?.message
-    }
-}
-
-</script>
-
+``` vue
 <template>
     <v-card class="mx-auto pa-4" max-width="400" elevation="6" rounded="lg">
         <div class="text-center my-3">
@@ -106,10 +83,19 @@ const handleRegister = async() => {
                     Crear
                 </v-btn>
             </v-card-actions>
-            <div class="text-center px-4">
-                <p class="font-body-2 text-medium-emphasis">
-                Ya tienes una cuenta? <router-link to="/">Inicia sesión</router-link></p>
-            </div>            
+      
         </v-form>
     </v-card>
-</template>
+```
+
+## Usuario ya registrado
+Si el usuario ya posee una cuenta, este puede regresar mediante el hipervínculo en la parte inferior 
+
+```vue
+<v-card class="mx-auto pa-4" max-width="400" elevation="6" rounded="lg">
+        <div class="text-center px-4">
+            <p class="font-body-2 text-medium-emphasis">
+            Ya tienes una cuenta? <router-link to="/">Inicia sesión</router-link></p>
+        </div>
+</v-card>
+```

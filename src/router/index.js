@@ -11,7 +11,7 @@ const routes = [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login, name: 'login' },
     { path: '/registro', component: Register },
-    { path: '/home', component: AuthView, meta: {roles:[1,2]}},
+    { path: '/home', component: AuthView},
     { path: '/data', component: UserData},
     { path: '/pulsaciones', component: Pulsaciones, meta: {roles: [2]} },
     { path: '/first', component: FirstPage}

@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '../store/auth'
+import { useAuthStore } from '../store/auth.js'
 
 const router = useRouter()
 const useAuth = useAuthStore()
@@ -9,7 +9,7 @@ const useAuth = useAuthStore()
 const handleView = async () => {
     try{
         if(useAuth.autenticado){
-            useAuth.logout()
+            await useAuth.logout()
             router.push('/first')
 
         } else{

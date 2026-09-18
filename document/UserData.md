@@ -1,29 +1,12 @@
-<script setup>
-/* Librerias externas del proyecto */
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import api from '../services/axios.js';
+En este apartado se visualiza toda la información del usuario, como su nombre de usuario, correo y teléfono, estos datos se extraen de una petición del backend que es `api.get('usuarios')`, con esto se manda la petición y se extrae el Json, y con una nueva constante llamamos al valor de la data del usuario y la cargamos para despues mostrarla, se hace tambien con el método onMounted ya que se ejecuta cuando el componente ya está preparado, además de que queremos que se carguen y queden en pantalla.
 
-const cargando = ref(true)
-const router = useRouter()
-const error = ref('')
-const userInfo = ref(null)
+Después de eso se hace una condición para verificar que la variable cargando pasa a falsa, ya que esto ocurre cuando onMounted termina su ciclo de carga y puede pasar a mostrar o no los datos, si no se hace esto, onMounted al ser una petición asíncrona, tarda unos milisegundos en traer la información, pero al momento que ya la trajo, la página supuso que no hay información
 
-onMounted(async () => {
-    try {
-        const response = await api.get('/usuario')
-        userInfo.value = response.data.usuario
-    } catch (e) {
-        error.value = 'No se pudieron cargar los datos'
-    } finally{
-        cargando.value = false
-    }
-})
+Ahora, despues de esa validación, hay otra validación de acuerdo a si se extrajo o no información
+- Si hubo éxito, se mostrarán los datos del usuario en la pantalla
+- Si no hubo éxito, se mostrará una pestaña con un texto de que no se encontraron los datos
 
-</script>
-
-<template>
-
+```vue
     <v-card max-width="650" class="mx-auto pa-4" rounded="lg">
         <v-card-text v-if="cargando">
             Cargando
@@ -57,10 +40,10 @@ onMounted(async () => {
             prepend-icon="mdi-page-first"
             size="large"
             :loading="cargando"
-            @click="router.push('/home')"
             >
                 Regresar al inicio
             </v-btn>
         </v-card-actions>
     </v-card>
-</template>
+```
+
