@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '../store/auth.js';
+import router from '../router/index.js';
 
 const useAuth = useAuthStore()
 
@@ -9,18 +10,29 @@ const password = ref('')
 const correo = ref('')
 const telefono = ref('')
 const error = ref('')
+const success = ref('')
+const mostrarPassword = ref(false)
 
 const handleRegister = async() => {
+    error.value = ''
+    success.value = ''
+
     try{
-        await useAuth.register({
+        const response = await useAuth.register({
             usuario: usuario.value,
             password: password.value,
             correo: correo.value,
             telefono: telefono.value
         })
+
+        success.value = response.message
+
+        setTimeout(() => {
+            router.push('/login')
+        }, 1500)
     }
     catch(e){
-        error.value = e.response.data?.message
+        error.value = e.response?.data?.message || 'No se pudo crear la cuenta.'
     }
 }
 
@@ -49,6 +61,17 @@ const handleRegister = async() => {
                 closable
                 >
                 {{ error }}
+                </v-alert>
+
+                <v-alert
+                v-if="success"
+                type="success"
+                variant="tonal"
+                density="compact"
+                class="mb-4"
+                closable
+                >
+                {{ success }}
                 </v-alert>
 
                 <!-- Campo de usuario -->

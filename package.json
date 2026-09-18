@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "styleguide": "vue-styleguidist server --config styleguide.config.cjs",
-    "styleguide:build": "vue-styleguidist build"
+    "styleguide:build": "vue-styleguidist build --config styleguide.config.cjs"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
